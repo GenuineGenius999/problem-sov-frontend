@@ -1,9 +1,207 @@
-body { font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin: 0; padding: 20px; background: #f5f7fb; color: #0b1220; }
-.app { max-width: 900px; margin: 0 auto; }
-.form { display: grid; gap: 8px; background: white; padding: 16px; border-radius: 8px; box-shadow: 0 6px 18px rgba(20,30,60,0.08); }
-.form label { font-weight: 600; }
-textarea { width: 100%; padding: 8px; font-size: 14px; }
-select, input[type=file], button { padding: 8px; }
-button { cursor: pointer; }
-.output { margin-top: 16px; }
-.solution { background: #fff; padding: 12px; border-radius: 6px; min-height: 120px }
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  color: #1a202c;
+}
+
+.app {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+  color: white;
+  margin: 0 0 8px 0;
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.subtitle {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 0 30px 0;
+  font-size: 1rem;
+  letter-spacing: 1px;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  max-height: fit-content;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form label {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #2d3748;
+}
+
+textarea,
+select,
+input[type='file'] {
+  padding: 10px 12px;
+  font-size: 14px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 6px;
+  font-family: inherit;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+textarea:focus,
+select:focus,
+input[type='file']:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+textarea {
+  resize: vertical;
+}
+
+.file-info {
+  font-size: 0.85rem;
+  color: #667eea;
+  margin: 0;
+}
+
+.camera-controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+}
+
+.btn-primary,
+.btn-secondary {
+  padding: 10px 16px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  grid-column: 1 / -1;
+  padding: 12px 16px;
+  font-size: 1rem;
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(102, 126, 234, 0.4);
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: #f0f4ff;
+  color: #667eea;
+  border: 1px solid #e2e8f0;
+}
+
+.btn-secondary:hover {
+  background: #e6ecff;
+  border-color: #667eea;
+}
+
+video {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 6px;
+  margin-top: 10px;
+}
+
+.output {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  min-height: 400px;
+}
+
+.output h2 {
+  margin: 0 0 16px 0;
+  color: #2d3748;
+  font-size: 1.5rem;
+}
+
+.solution {
+  background: #f7fafc;
+  padding: 16px;
+  border-radius: 8px;
+  border-left: 4px solid #667eea;
+  overflow-x: auto;
+}
+
+.solution pre {
+  margin: 0;
+  font-family: 'Fira Code', 'Courier New', monospace;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  color: #2d3748;
+}
+
+.error {
+  background: #fed7d7;
+  color: #c53030;
+  padding: 12px;
+  border-radius: 6px;
+  border-left: 4px solid #c53030;
+  margin-bottom: 16px;
+}
+
+.placeholder {
+  color: #a0aec0;
+  text-align: center;
+  padding: 40px 20px;
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .camera-controls {
+    grid-template-columns: 1fr 1fr;
+  }
+}
